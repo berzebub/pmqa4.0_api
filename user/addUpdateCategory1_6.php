@@ -12,22 +12,19 @@ $pdf_path = $data['pdf_path'];
 $img_path = $data['img_path'];
 $year = $data['year'];//ปี
 $query_mode = $data['query_mode']; // 0 == insert -- 1 == update
-if($query_mode == 0){
-    $db -> insert("category1-6_log",
+// if($query_mode == 0){
+
+    $checkExists = $db -> select("category1-6_log","*",
         [
             "user_id" => $user_id,
-            "step" => $step,
+            "year" => $year,
             "q_number" => $q_number,
             "mode" => $mode,
-            "text" => $text,
-            "check_box" => $check_box,
-            "pdf_path" => $pdf_path,
-            "img_path" => $img_path,
-            "year" => $year,
+            "step" => $step,
         ]);
-}else{  
-    $id = $data['id'];
-    $db -> update("category1-6_log",
+
+    if(count($checkExists) > 0){
+        $db -> update("category1-6_log",
         [
             "user_id" => $user_id,
             "step" => $step,
@@ -40,10 +37,25 @@ if($query_mode == 0){
             "year" => $year,
         ],
         [
-            "id" => $id
+            "user_id" => $user_id,
+            "step" => $step,
+            "q_number" => $q_number,
+            "mode" => $mode,
+            "year" => $year
         ]);
-}
-
-
+    }else{
+         $db -> insert("category1-6_log",
+        [
+            "user_id" => $user_id,
+            "step" => $step,
+            "q_number" => $q_number,
+            "mode" => $mode,
+            "text" => $text,
+            "check_box" => $check_box,
+            "pdf_path" => $pdf_path,
+            "img_path" => $img_path,
+            "year" => $year,
+        ]);
+    }
 
 ?>
