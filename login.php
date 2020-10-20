@@ -13,11 +13,7 @@ if($type == 'ผู้ใช้แต่ละหน่วยงาน'){
         "username" => $username,
         "password" => $password,
     ]);
-    if(count($checkLogin) > 0){
-        echo 1;
-    }else{
-        echo 0;
-    }
+   
 
 }else if ($type == 'ผู้ประเมิน'){
     // assessor accounts
@@ -26,20 +22,19 @@ if($type == 'ผู้ใช้แต่ละหน่วยงาน'){
         "username" => $username,
         "password" => $password,
     ]);
-    if(count($checkLogin) > 0){
-        echo 1;
-    }else{
-        echo 0;
-    }
+   
 
 }else{
-    if($username == 'admin' && $password == '123456'){
+    $checkLogin = $db -> select("admin_accounts","*",
+    [
+        "username" => $username,
+        "password" => $password
+    ]);
+
+}
+ if(count($checkLogin) > 0){
         echo 1;
     }else{
         echo 0;
     }
-}
-
-
-
 ?>
