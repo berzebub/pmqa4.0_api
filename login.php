@@ -1,7 +1,6 @@
 <?php 
 require("connection.php");
 $data = json_decode(file_get_contents('php://input'), true);
-// print_r($data['username']);
 $username = $data['username'];
 $password = $data['password'];
 $type = $data['type'];
