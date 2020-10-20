@@ -13,7 +13,9 @@ CREATE TABLE `assessor_accounts`
   `id` INT NOT NULL,
   `username` VARCHAR(16) NOT NULL,
   `password` VARCHAR(16) NOT NULL,
-  `tel` VARCHAR(10) NOT NULL
+  `tel` VARCHAR(10) NOT NULL,
+  `status` INT NOT NULL COMMENT '0=ใช้งาน 1=deleted',
+  `name` TEXT NOT NULL
 ) ENGINE=InnoDB COLLATE=utf8_bin COMMENT='account ของผู้ประเมิน';
 
 CREATE TABLE `assessment_status`
@@ -65,9 +67,21 @@ CREATE TABLE `category1-6_log`
 0 = false, 1 = true',
   `pdf_path` TEXT NOT NULL,
   `img_path` TEXT NOT NULL,
-  `status` INT NOT NULL COMMENT '0= false , 1= true
-สถานะการบันทึกข้อมูลข้อนั้นๆ',
   `year` INT NOT NULL
+) ENGINE=InnoDB COLLATE=utf8_bin;
+
+CREATE TABLE `category7`
+(
+  `id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `q_number` INT NOT NULL
+) ENGINE=InnoDB COLLATE=utf8_bin;
+
+CREATE TABLE `admin_accounts`
+(
+  `id` INT NOT NULL,
+  `username` VARCHAR(16) NOT NULL,
+  `password` VARCHAR(16) NOT NULL
 ) ENGINE=InnoDB COLLATE=utf8_bin;
 
 ALTER TABLE `user_accounts` ADD PRIMARY KEY (`id`);
@@ -76,9 +90,13 @@ ALTER TABLE `assessment_status` ADD PRIMARY KEY (`id`);
 ALTER TABLE `user_stepper_log` ADD PRIMARY KEY (`id`);
 ALTER TABLE `category0_log` ADD PRIMARY KEY (`id`);
 ALTER TABLE `category1-6_log` ADD PRIMARY KEY (`id`);
+ALTER TABLE `category7` ADD PRIMARY KEY (`id`);
+ALTER TABLE `admin_accounts` ADD PRIMARY KEY (`id`);
 ALTER TABLE `user_accounts` CHANGE COLUMN `id` `id`  INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE `assessor_accounts` CHANGE COLUMN `id` `id`  INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE `assessment_status` CHANGE COLUMN `id` `id`  INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE `user_stepper_log` CHANGE COLUMN `id` `id`  INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE `category0_log` CHANGE COLUMN `id` `id`  INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE `category1-6_log` CHANGE COLUMN `id` `id`  INT NOT NULL AUTO_INCREMENT;
+ALTER TABLE `category7` CHANGE COLUMN `id` `id`  INT NOT NULL AUTO_INCREMENT;
+ALTER TABLE `admin_accounts` CHANGE COLUMN `id` `id`  INT NOT NULL AUTO_INCREMENT;

@@ -21,6 +21,7 @@ if($type == 'ผู้ใช้แต่ละหน่วยงาน'){
     [
         "username" => $username,
         "password" => $password,
+        "status" => 0 //สถานะใช้งาน
     ]);
    
 
@@ -33,7 +34,7 @@ if($type == 'ผู้ใช้แต่ละหน่วยงาน'){
 
 }
  if(count($checkLogin) > 0){
-        echo 1;
+        echo $checkLogin[0]['id'];
     }else{
         echo 0;
     }
