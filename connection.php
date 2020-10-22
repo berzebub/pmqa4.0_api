@@ -21,7 +21,7 @@ $db = new Medoo([
 	'database_name' => 'pmqa4.0',
 	'server' => 'localhost',
 	'username' => 'root',
-	'password' => '12345678',
+	'password' => '',
 ]);
 
 ?>
