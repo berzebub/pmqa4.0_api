@@ -1,20 +1,39 @@
 <?php 
+require("../connection.php");
 
 //***** เหลือส่วน upload files -- move files */
-$data = json_decode(file_get_contents('php://input'), true);
+$data = $_POST;
+
 $user_id = $data['user_id']; //
 $step = $data['step'];
 $q_number = $data['q_number']; //ข้อที่
-$mode = $data['mode'] // basic -- advance -- significance
+$mode = $data['mode']; // basic -- advance -- significance
 $text = $data['text'];//ข้อความ
 $check_box = $data['check_box']; // เช็ค box ที่เลือก รูปแบบ 0-0-0  --  0 = false, 1 = true
-$pdf_path = $data['pdf_path'];
-$img_path = $data['img_path'];
 $year = $data['year'];//ปี
-$query_mode = $data['query_mode']; // 0 == insert -- 1 == update
-// if($query_mode == 0){
+$is_img = 0; //สถานะว่ามีรูปภาพหรือไม่
+$is_pdf = 0; //สถานีว่ามี pdf หรือไม่
 
-    $checkExists = $db -> select("category1-6_log","*",
+
+
+
+    if(isset($_FILES['img'])){
+        $img_file = $_FILES['img']['tmp_name'];
+        $real_img_name = $_FILES['img']['name'];
+        $img_file_info = pathinfo($real_img_name,PATHINFO_EXTENSION);
+        $new_img_file_name = $user_id."-".$step."-".$q_number."-".$mode."-".$year.'.'.$img_file_info;
+        move_uploaded_file($img_file, "../upload/" . $new_img_file_name);
+        $is_img = 1;
+    }
+
+    if(isset($_FILES['pdf'])){
+        $pdf_file = $_FILES['pdf']['tmp_name'];
+        $new_pdf_file_name = $user_id."-".$step."-".$q_number."-".$mode."-".$year.".pdf";
+        move_uploaded_file($pdf_file, "../upload/" . $new_pdf_file_name);
+        $is_pdf = 1;
+    }
+
+    $checkExists = $db -> select("category1_6_log","*",
         [
             "user_id" => $user_id,
             "year" => $year,
@@ -24,7 +43,7 @@ $query_mode = $data['query_mode']; // 0 == insert -- 1 == update
         ]);
 
     if(count($checkExists) > 0){
-        $db -> update("category1-6_log",
+        $db -> update("category1_6_log",
         [
             "user_id" => $user_id,
             "step" => $step,
@@ -32,8 +51,8 @@ $query_mode = $data['query_mode']; // 0 == insert -- 1 == update
             "mode" => $mode,
             "text" => $text,
             "check_box" => $check_box,
-            "pdf_path" => $pdf_path,
-            "img_path" => $img_path,
+            "is_pdf" => $is_pdf,
+            "is_img" => $is_img,
             "year" => $year,
         ],
         [
@@ -44,7 +63,7 @@ $query_mode = $data['query_mode']; // 0 == insert -- 1 == update
             "year" => $year
         ]);
     }else{
-         $db -> insert("category1-6_log",
+         $db -> insert("category1_6_log",
         [
             "user_id" => $user_id,
             "step" => $step,
@@ -52,8 +71,8 @@ $query_mode = $data['query_mode']; // 0 == insert -- 1 == update
             "mode" => $mode,
             "text" => $text,
             "check_box" => $check_box,
-            "pdf_path" => $pdf_path,
-            "img_path" => $img_path,
+            "is_pdf" => $is_pdf,
+            "is_img" => $is_img,
             "year" => $year,
         ]);
     }
