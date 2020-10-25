@@ -22,6 +22,7 @@ $db = new Medoo([
 	'server' => 'localhost',
 	'username' => 'root',
 	'password' => '',
+	"charset" => "utf8",
 ]);
 
 ?>
