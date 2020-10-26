@@ -22,7 +22,8 @@ if(count($checkExists) > 0){
         "year" => $year
     ]);
 
-}else{
+}
+else{
     $db -> insert("user_stepper_log",
     [
         "user_id" => $user_id,
@@ -39,13 +40,25 @@ if(count($checkExists) > 0){
         
     ]);
 
-    $db -> update("user_stepper_log",
-    [
-        $category => $status
-    ],
-    [
-        "user_id" => $user_id,
-        "year" => $year
-    ]);
+
+    $checkExists = $db -> select("user_stepper_log","*",
+        [
+            "user_id" => $user_id,
+            "year" => $year
+        ]);
+        if(count($checkExists) > 0){
+            
+            $db -> update("user_stepper_log",
+            [
+                $category => $status
+            ],
+            [
+                "user_id" => $user_id,
+                "year" => $year
+            ]);
+
+        }
+
+    
 }
 ?>
