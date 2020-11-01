@@ -33,6 +33,15 @@ $is_pdf = 0; //สถานีว่ามี pdf หรือไม่
         $is_pdf = 1;
     }
 
+
+    if($data['img'] != 'null'){
+        $is_img = 1;
+    }
+
+    if($data['pdf'] != 'null'){
+        $is_pdf = 1;
+    }
+
     $checkExists = $db -> select("category1_6_log","*",
         [
             "user_id" => $user_id,

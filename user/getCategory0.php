@@ -15,6 +15,8 @@ for($i=0;$i<count($get_data);$i++){
     $result[$i]['category'] = $get_data[$i]['category'];
     $result[$i]['category_q_number'] = $get_data[$i]['category_q_number'];
     $result[$i]['text'] = $get_data[$i]['text'];
+    $result[$i]['is_img'] = $get_data[$i]['is_img'];
+    $result[$i]['is_pdf'] = $get_data[$i]['is_pdf'];
 }
 
 echo json_encode($result);

@@ -5,7 +5,13 @@ $user_id = $data['user_id'];
 $year = $data['year'];
 $category = $data['category'];
 $status = $data['status'];
+$send_status = "0";
 
+if(isset($data['send_status'])){
+    $send_status = $data['send_status'];
+}
+
+echo "sendStatus".$send_status;
 $checkExists = $db -> select("user_stepper_log","*",
 [
     "user_id" => $user_id,
@@ -15,15 +21,15 @@ $checkExists = $db -> select("user_stepper_log","*",
 if(count($checkExists) > 0){
      $db -> update("user_stepper_log",
     [
-        $category => $status
+        $category => $status,
+        "send_status" => $send_status
     ],
     [
         "user_id" => $user_id,
         "year" => $year
     ]);
 
-}
-else{
+}else{
     $db -> insert("user_stepper_log",
     [
         "user_id" => $user_id,
@@ -54,7 +60,8 @@ else{
             ],
             [
                 "user_id" => $user_id,
-                "year" => $year
+                "year" => $year,
+                
             ]);
 
         }
