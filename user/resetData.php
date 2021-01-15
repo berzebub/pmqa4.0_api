@@ -23,4 +23,23 @@ $db -> delete('category7_log',
     "year" => $year + 543
 ]);
 
+$db -> delete("user_stepper_log",
+[
+    "user_id" => $user_id,
+    "year" => $year 
+]);
+
+$db -> delete("upload_file_main",
+[
+    "user_id" => $user_id,
+    "year" => $year
+]);
+
+$db -> delete("assessment_log",
+[
+    "user_id" => $user_id,
+    "year" => $year
+]);
+
+
 ?>

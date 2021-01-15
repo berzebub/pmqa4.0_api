@@ -13,18 +13,11 @@ $check_box = $data['check_box']; // เช็ค box ที่เลือก �
 $year = $data['year'];//ปี
 $is_img = 0; //สถานะว่ามีรูปภาพหรือไม่
 $is_pdf = 0; //สถานีว่ามี pdf หรือไม่
+$score = $data['score'];
 
 
 
 
-    if(isset($_FILES['img'])){
-        $img_file = $_FILES['img']['tmp_name'];
-        $real_img_name = $_FILES['img']['name'];
-        $img_file_info = pathinfo($real_img_name,PATHINFO_EXTENSION);
-        $new_img_file_name = $user_id."-".$step."-".$q_number."-".$mode."-".$year.'.'.$img_file_info;
-        move_uploaded_file($img_file, "../upload/" . $new_img_file_name);
-        $is_img = 1;
-    }
 
     if(isset($_FILES['pdf'])){
         $pdf_file = $_FILES['pdf']['tmp_name'];
@@ -34,9 +27,6 @@ $is_pdf = 0; //สถานีว่ามี pdf หรือไม่
     }
 
 
-    if($data['img'] != 'null'){
-        $is_img = 1;
-    }
 
     if($data['pdf'] != 'null'){
         $is_pdf = 1;
@@ -63,6 +53,7 @@ $is_pdf = 0; //สถานีว่ามี pdf หรือไม่
             "is_pdf" => $is_pdf,
             "is_img" => $is_img,
             "year" => $year,
+            "score" => $score
         ],
         [
             "user_id" => $user_id,
@@ -71,6 +62,19 @@ $is_pdf = 0; //สถานีว่ามี pdf หรือไม่
             "mode" => $mode,
             "year" => $year
         ]);
+
+        $db -> update("category1_6_log",
+        [
+            "score" => $score
+        ],
+        [
+            "user_id" => $user_id,
+            "step" => $step,
+            "q_number" => $q_number,
+            "year" => $year
+        ]);
+
+
     }else{
          $db -> insert("category1_6_log",
         [
@@ -83,6 +87,18 @@ $is_pdf = 0; //สถานีว่ามี pdf หรือไม่
             "is_pdf" => $is_pdf,
             "is_img" => $is_img,
             "year" => $year,
+            "score" => $score
+        ]);
+
+        $db -> update("category1_6_log",
+        [
+            "score" => $score
+        ],
+        [
+            "user_id" => $user_id,
+            "step" => $step,
+            "q_number" => $q_number,
+            "year" => $year
         ]);
     }
 

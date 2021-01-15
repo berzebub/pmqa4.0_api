@@ -12,7 +12,6 @@ $tel = $data['tel'];
 $is_username_exists = $db -> select("assessor_accounts","username",
 [
     "username" => $username,
-    "status" => 0 // 0 = สถานะใช้งานอยู่
 ]);
 
 

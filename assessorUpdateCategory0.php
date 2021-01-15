@@ -1,5 +1,5 @@
 <?php 
-require("../connection.php");
+require("connection.php");
 $data = json_decode(file_get_contents('php://input'), true);
 $mode = $data['mode']; // 0 = insert // 1= update
 $post_data = $data['postData'];
@@ -9,7 +9,11 @@ $uid = $data['user_id'];
 
 
 for($i=0;$i<count($post_data);$i++){
- 
+    if($post_data[$i]['suggesstion']){
+        $suggesstion = $post_data[$i]['suggesstion'];
+    }else{
+        $suggesstion = "";
+    }
         $checkExists = $db -> select("category0_log","*",
             [
                     "user_id" => $uid,
@@ -29,6 +33,7 @@ for($i=0;$i<count($post_data);$i++){
                     "category_q_number" => $post_data[$i]['category_q_number'],
                     "text" => $post_data[$i]['text'],
                     "year" => $year,
+                    "suggesstion" =>  $suggesstion
                 ],
                 [
                     "user_id" => $uid,
@@ -47,6 +52,7 @@ for($i=0;$i<count($post_data);$i++){
                     "category_q_number" => $post_data[$i]['category_q_number'],
                     "text" => $post_data[$i]['text'],
                     "year" => $year,
+                    "suggesstion" =>  $suggesstion
                 ]);
         }
   

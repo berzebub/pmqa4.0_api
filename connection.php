@@ -1,8 +1,8 @@
 <?php 
-
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 header('Content-type: application/x-www-form-urlencoded');
 header('Content-type: application/json');
 
@@ -21,8 +21,10 @@ $db = new Medoo([
 	'database_name' => 'pmqa4.0',
 	'server' => 'localhost',
 	'username' => 'root',
-	'password' => '',
-	"charset" => "utf8",
+    'password' => '12345678',
+    "charset" => "utf8",
 ]);
+
+
 
 ?>

@@ -11,6 +11,12 @@ if(count($user_list)){
     $result[$i]['password'] = $user_list[$i]['password'];
     $result[$i]['collaborator'] = $user_list[$i]['collaborator'];
     $result[$i]['tel'] = $user_list[$i]['tel'];
+    if($user_list[$i]['assessor_id'] == 0){
+$result[$i]['assessor'] = "กรุณาเลือก";
+    }else{
+$result[$i]['assessor'] = $user_list[$i]['assessor_id'];
+    }
+    
 }
 
 echo json_encode($result);

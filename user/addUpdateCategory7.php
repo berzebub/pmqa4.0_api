@@ -5,6 +5,7 @@ $user_id = $data['user_id'];
 $q_number = $data['q_number'];//ข้อที่
 $json = $data['json'];
 $avg_score = $data['avg_score'];
+$a_avg_score = $data['a_avg_score'];
 // $status = $data['status'];//สถานะของข้อ 0 ยังไม่ประเมิน 1 ประเมินแล้ว
 // $indicators = $data['indicators'];//ตัวชี้วัด
 // $goal = $data['goal'];//เป้าหมายประจำปี
@@ -14,6 +15,10 @@ $avg_score = $data['avg_score'];
 $year = $data['year'];
 // $score_standard = $data['score_standard'];
 // $result = $data['result'];
+
+if(isset($data['totala_avg_score'])){
+    $totala_avg_score = $data['totala_avg_score'];
+}
 
 $check_exists = $db -> select("category7_log","*",
 [
@@ -29,8 +34,8 @@ if(count($check_exists)){
         "q_number" => $q_number,
         "year" => $year,
         "json" => $json,
-        "status" => 0,
-        "avg_score" => $avg_score
+        "avg_score" => $avg_score,
+        "a_avg_score" => $a_avg_score
 ],
 [
     "user_id" => $user_id,
@@ -45,11 +50,26 @@ $db -> insert("category7_log",
         "q_number" => $q_number,
         "year" => $year,
         "json" => $json,
-        "status" => 0,
-        "avg_score" => $avg_score
+        "avg_score" => $avg_score,
+        "a_avg_score" => $a_avg_score
 ]);
 
 }
+
+
+
+$db ->update("assessment_log",
+        [
+            "a_category7_score" => $totala_avg_score
+        ],
+        [
+            "user_id" => $user_id,
+            "year" => $year-543
+        ]
+        );
+
+
+
 
 
 

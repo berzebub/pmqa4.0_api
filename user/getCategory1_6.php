@@ -19,6 +19,10 @@ for($i=0;$i<count($data);$i++){
     $result[$i]['check_box'] = $data[$i]['check_box'];
     $result[$i]['is_pdf'] = $data[$i]['is_pdf'];
     $result[$i]['is_img'] = $data[$i]['is_img'];
+    $result[$i]['score'] = $data[$i]['score'];
+    $result[$i]['a_score'] = $data[$i]['a_score'];
+    $result[$i]['a_check_box'] = $data[$i]['a_check_box'];
+    $result[$i]['suggesstion'] = $data[$i]['suggesstion'];
 }
 
 echo json_encode($result);
