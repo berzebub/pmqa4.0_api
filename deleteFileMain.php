@@ -14,9 +14,13 @@ $checkExists = $db -> select("upload_file_main","*",
 if($type == 1){
     $file = "file1";
     $path = "path1";
+
+
+   
 }else{
     $file = "file2";
     $path = "path2";
+    
 }
 
 if($checkExists){

@@ -1,0 +1,1 @@
+$uid . "-". $type . "-".  $year . "." . $file_info;
