@@ -1,9 +1,18 @@
 <?php 
 require("connection.php");
+
+ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+error_reporting(-1);
+
+
 $data = $_POST;
 $year = $data['year'];
 $uid = $data['user_id'];
 $type = $data['type'];
+
+
+print_r($data);
 
    if(isset($_FILES['file'])){
         $file = $_FILES['file']['tmp_name'];
@@ -27,6 +36,7 @@ if($type == 1){
 }
 
 if($checkExists){
+    echo "update";
     $db -> update("upload_file_main",
     [
         $file => 1,
@@ -38,6 +48,7 @@ if($checkExists){
     ]);
 
 }else{
+    echo "no update";
     $db -> insert("upload_file_main",
     [
         $file => 1,
@@ -46,6 +57,6 @@ if($checkExists){
         $path => "uploadMain/" .$new_file_name
     ]);
 }
-
+echo "success";
     }
 ?>

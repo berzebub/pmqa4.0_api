@@ -60,6 +60,17 @@ if($mode == '1'){
     
 }
 
+$db -> update("user_stepper_log",
+[
+    "send_status" => 0
+],
+[
+    "user_id" => $user_id,
+    "year" => $year
+]);
+
+
+
 
 echo "success";
 ?>
