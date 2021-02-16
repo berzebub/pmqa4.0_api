@@ -5,24 +5,24 @@ $year = $data['year'];
 $uid = $data['user_id'];
 $type = $data['type'];
   
-$checkExists = $db -> select("upload_file_6month","*",
-[
-    "user_id" => $uid,
-    "year" => $year
-]);
+// $checkExists = $db -> select("upload_file_6month","*",
+// [
+//     "user_id" => $uid,
+//     "year" => $year
+// ]);
 
 
-if($checkExists){
+// if($checkExists){
     $db -> update("upload_file_6month",
     [
-        $path => "",
+        "path" => "",
     ],
     [
      "user_id" => $uid,
      "year" => $year   
     ]);
 
-}
+// }
 
     
 ?>
