@@ -5,7 +5,8 @@ $user_id = $data['user_id'];
 $year = $data['year'];
 $plan = $data['plan'];
 
-$data = $db -> select("upload_file_plan","*",
+
+$data = $db -> select("upload_file_12_a","*",
 [
     "user_id" => $user_id,
     "year" => $year,
@@ -13,4 +14,5 @@ $data = $db -> select("upload_file_plan","*",
 ]);
 
 echo json_encode($data);
+
 ?>
